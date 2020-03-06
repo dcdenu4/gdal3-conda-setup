@@ -32,9 +32,9 @@ class MyTests(unittest.TestCase):
         base_srs.ImportFromEPSG(3157) # NAD83(CSRS) / UTM zone 10N
 
         target_reference = osr.SpatialReference()
-        target_reference.ImportFromEPSG(26918) # UTM zone 18N
+        target_reference.ImportFromEPSG(3116) # UTM zone 18N
 
         self.assertTrue(
-            osr.SpatialReference(base_srs.ExportToWkt()).IsSame(
-                osr.SpatialReference(base_srs.ExportToWkt())))
+            osr.SpatialReference(target_reference.ExportToWkt()).IsSame(
+                osr.SpatialReference(target_reference.ExportToWkt())))
 
