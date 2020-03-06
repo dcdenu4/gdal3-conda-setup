@@ -43,4 +43,4 @@ jobs:
           ls -l /usr/share/miniconda/share/proj/
 
     - name: Test with pytest
-      run: pytest
+      run: pytest -s
