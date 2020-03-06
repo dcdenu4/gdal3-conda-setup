@@ -14,7 +14,7 @@ import numpy
 import scipy.ndimage
 import shapely.geometry
 
-print("ENV: ", print(os.environ))
+print("ENV: ", os.environ)
 
 class MyTests(unittest.TestCase):
 
