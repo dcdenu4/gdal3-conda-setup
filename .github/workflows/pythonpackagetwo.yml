@@ -40,7 +40,6 @@ jobs:
           conda install $PACKAGES
           printenv
           find /usr -name proj.db 
-          ls -l /usr/share/miniconda/share/proj/
 
     - name: Test with pytest
       run: pytest -s
