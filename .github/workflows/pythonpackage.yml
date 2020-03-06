@@ -32,6 +32,9 @@ jobs:
       run: conda upgrade -y pip setuptools
 
     - name: Install GDAL3 Test (Linux)
+      env: 
+          GDAL_DATA=/usr/share/miniconda/share/gdal/
+          PROJ_LIB=/usr/share/miniconda/share/proj/
       run: |
           conda install --file requirements.txt
           conda install $PACKAGES
