@@ -1,0 +1,43 @@
+name: Test PyGeoprocessing
+
+on: [push, pull_request]
+
+jobs:
+  Test:
+    runs-on: ${{ matrix.os }}
+    env:
+        PACKAGES: "pytest flake8"
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version: [3.7]
+        os: [ubuntu-18.04]
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+          # Fetch all history so that setuptool_scm can build the correct version string.
+          fetch-depth: 0
+
+    - name: setup-conda
+      uses: s-weigand/setup-conda@v1.0.2
+      with:
+        update-conda: false
+        python-version: ${{ matrix.python-version }}
+        activate-conda: true
+        conda-channels: anaconda, conda-forge
+    - name: Install dependencies
+      shell: bash
+      run: conda upgrade -y pip setuptools
+
+    - name: Install GDAL3 Test (Linux)
+      run: |
+          conda install --file requirements.txt
+          conda install $PACKAGES
+          printenv
+          find /usr -name proj.db 
+          ls -l /usr/share/miniconda/share/proj/
+
+    - name: Test with pytest
+      run: pytest
