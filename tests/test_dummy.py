@@ -14,7 +14,7 @@ import numpy
 import scipy.ndimage
 import shapely.geometry
 
-print("GDAL_DATA ENV: ", print(os.environ['GDAL_DATA']))
+print("ENV: ", print(os.environ))
 
 class MyTests(unittest.TestCase):
 
