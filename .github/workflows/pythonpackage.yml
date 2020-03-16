@@ -23,7 +23,7 @@ jobs:
     - name: setup-conda
       uses: s-weigand/setup-conda@v1.0.2
       with:
-        update-conda: false
+        update-conda: true
         python-version: ${{ matrix.python-version }}
         activate-conda: true
         conda-channels: anaconda, conda-forge
@@ -32,15 +32,11 @@ jobs:
       run: conda upgrade -y pip setuptools
 
     - name: Install GDAL3 Test (Linux)
-      env: 
-          GDAL_DATA: /usr/share/miniconda/share/gdal/
-          PROJ_LIB: /usr/share/miniconda/share/proj/
       run: |
+          source activate base
           conda install --file requirements.txt
           conda install $PACKAGES
           printenv
-          find /usr -name proj.db 
-          ls -l /usr/share/miniconda/share/proj/
 
     - name: Test with pytest
       run: pytest -s
