@@ -1,4 +1,4 @@
-name: Test PyGeoprocessing
+name: Test miniconda
 
 on: [push, pull_request]
 
@@ -20,11 +20,12 @@ jobs:
           # Fetch all history so that setuptool_scm can build the correct version string.
           fetch-depth: 0
 
-    - uses: goanpeca/setup-miniconda@v1
+    - uses: goanpeca/setup-miniconda@enh/channels
       with:
         activate-environment: anaconda-client-env
         python-version: 3.7
         auto-activate-base: true 
+        channels: conda-forge, anaconda
     - shell: bash -l {0}
       run: |
           conda info
